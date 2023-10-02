@@ -1,9 +1,9 @@
-// Trang tên là "Blogs.tsx"
+
 import React from "react";
 import { Grid } from "@mui/material";
 import dynamic from "next/dynamic";
 
-import Blog from "../src/components/blogs/Blog";
+import Blog from "../components/blogs/Blog";
 
 export default function Blogs() {
   return (
