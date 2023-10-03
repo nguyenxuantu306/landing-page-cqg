@@ -2,7 +2,8 @@ import { Container } from "@mui/material";
 
 import Logo from "../../Logo";
 
-import { MenuDesktop } from "./DesktopMenu";
+import DesktopMenu from "./DesktopMenu";
+import MenuLoginMenuRegister from "../menu-login-register/MenuLoginRegister";
 
 export default function DesktopHeader() {
   return (
@@ -15,7 +16,8 @@ export default function DesktopHeader() {
       maxWidth="lg"
     >
       <Logo />
-      <MenuDesktop />
+      <DesktopMenu />
+      <MenuLoginMenuRegister />
     </Container>
   );
-};
+}

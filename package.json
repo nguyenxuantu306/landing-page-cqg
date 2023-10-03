@@ -16,7 +16,8 @@
     "next": "^13.5.3",
     "react": "latest",
     "react-device-detect": "^2.2.3",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "styled-components": "^6.0.8"
   },
   "devDependencies": {
     "@types/node": "latest",

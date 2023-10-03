@@ -8,10 +8,9 @@ import {
   Stack,
   styled,
   Typography,
+  useTheme,
 } from "@mui/material";
-
-import { theme, useTheme, createTheme  } from "@mui/material/styles";
-
+import Image from "next/legacy/image";
 
 import Logo from "../Logo";
 import { FooterContentColumn, footerShortcuts } from "./footer-shortcut.ts";
@@ -35,26 +34,47 @@ const SubMenu = styled(Link)({
   fontWeight: 500,
 });
 
-export default function MainFooter({ theme }) {
-  const ContentFooter = styled(Box)(({ theme }) => ({
-    backgroundColor: "#F2F7FF",
+const ContentCopyRight = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column-reverse",
+  },
+}));
+
+const ListSocial = styled(Box)(({ theme }) => ({
+  display: "flex",
+  [theme.breakpoints.down("sm")]: {
+    justifyContent: "space-evenly",
     width: "100%",
-    padding: "64px 0px",
-    [theme.breakpoints.down("sm")]: {
-      padding: "32px 0px 20px",
+    marginBottom: "10px",
+  },
+  a: {
+    margin: "0px 12px",
+  },
+}));
+const ContentFooter = styled(Box)(({ theme }) => ({
+  backgroundColor: "#F2F7FF",
+  width: "100%",
+  padding: "64px 0px",
+  [theme.breakpoints.down("sm")]: {
+    padding: "32px 0px 20px",
+  },
+  "& .item-footer": {
+    [theme.breakpoints.down("lg")]: {
+      paddingRight: "20px",
     },
-    "& .item-footer": {
-      [theme.breakpoints.down("lg")]: {
-        paddingRight: "20px",
-      },
-      [theme.breakpoints.down("md")]: {
-        paddingRight: "0px",
-      },
-      [theme.breakpoints.down("md")]: {
-        marginBottom: "0px",
-      },
+    [theme.breakpoints.down("md")]: {
+      paddingRight: "0px",
     },
-  }));
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "0px",
+    },
+  },
+}));
+export default function MainFooter() {
+  const theme = useTheme();
   return (
     <ContentFooter
       sx={(theme) => ({
@@ -65,13 +85,19 @@ export default function MainFooter({ theme }) {
         },
       })}
     >
-      <Container maxWidth="lg" sx={{fontFamily: "Inter", fontWeight: 400}}>
-      <Grid
+      <Container maxWidth="lg" sx={{ fontFamily: "Inter", fontWeight: 400 }}>
+        <Grid
           container
           justifyContent={{ xs: "center", md: "space-between" }}
-        //   sx={{ pb: theme.spacing(1) }}
+          sx={{ pb: theme.spacing(1) }}
         >
-          <Grid className="item-footer" item xs={12} md={3} sx={{ mb: 3 }}>
+          <Grid
+            className="item-footer"
+            item
+            xs={12}
+            md={3}
+            sx={{ mb: 3, p: 1 }}
+          >
             <Stack spacing={1}>
               <Logo sx={{ mx: { sm: "inherit", md: "inherit" } }} />
               <Stack direction={"row"} spacing={1}>
@@ -112,6 +138,85 @@ export default function MainFooter({ theme }) {
             <FooterShortcutColumn key={item.title} column={item} />
           ))}
         </Grid>
+        <Divider sx={{ my: theme.spacing(2) }} />
+        <ContentCopyRight>
+          <Typography
+            component="p"
+            textAlign={"center"}
+            sx={{ color: "#5f6d7e", fontSize: "16px" }}
+          >
+            Bản quyền © 2023 ANFIN
+          </Typography>
+          <ListSocial>
+            <Link
+              href="#"
+              target="_blank"
+              onClick={() => {
+                EventLog(
+                  "AFweb_footer_facebook_button",
+                  user?.userFS.uid,
+                  browserName
+                );
+              }}
+            >
+              <Image
+                src="/logo/facebook.svg"
+                alt="Facebook"
+                width={24}
+                height={24}
+              />
+            </Link>
+            <Link
+              href="#"
+              target="_blank"
+              onClick={() => {
+                EventLog(
+                  "AFweb_footer_linkedin_button",
+                  user?.userFS.uid,
+                  browserName
+                );
+              }}
+            >
+              <Image src="/logo/in.svg" alt="Facebook" width={24} height={24} />
+            </Link>
+            <Link
+              href="#"
+              target="_blank"
+              onClick={() => {
+                EventLog(
+                  "AFweb_footer_tiktok_button",
+                  user?.userFS.uid,
+                  browserName
+                );
+              }}
+            >
+              <Image
+                src="/logo/tiktok.svg"
+                alt="Facebook"
+                width={24}
+                height={24}
+              />
+            </Link>
+            <Link
+              href="#"
+              target="_blank"
+              onClick={() => {
+                EventLog(
+                  "AFweb_footer_instagram_button",
+                  user?.userFS.uid,
+                  browserName
+                );
+              }}
+            >
+              <Image
+                src="/logo/instagram.svg"
+                alt="Facebook"
+                width={24}
+                height={24}
+              />
+            </Link>
+          </ListSocial>
+        </ContentCopyRight>
       </Container>
     </ContentFooter>
   );

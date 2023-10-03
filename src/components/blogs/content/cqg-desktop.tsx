@@ -125,6 +125,7 @@ export default function Download() {
           alignItems: "center",
           p: 3,
         }}
+        
       >
         <Image
           src="/landing-page/cqg-desktop.png"

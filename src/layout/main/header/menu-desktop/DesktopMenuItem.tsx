@@ -1,8 +1,28 @@
 import React, { useRef } from "react";
-import { Stack, Typography, Popover, List, CustomLink,  ListItem} from "@mui/material";
-import { ArrowDropUp, ArrowDropDown } from "@mui/icons-material";
+import {
+  List,
+  ListItem,
+  Popover,
+  Stack,
+  Typography,
+  useTheme,
+  styled,
+} from "@mui/material";
+import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
+import router from "next/router";
 
 import type { NavItemConfig } from "../appbar-menu";
+
+const CustomLink = styled(Typography)(({ theme }) => ({
+  color: "#050506",
+  fontWeight: "600",
+  "&:hover": {
+    color: "#0075E7",
+  },
+  cursor: "pointer",
+  padding: theme.spacing(1, 1),
+  display: "flex",
+}));
 
 export const DesktopMenuItem = ({
   menu,
@@ -15,7 +35,8 @@ export const DesktopMenuItem = ({
   onOpenMenu: (title: string) => void;
   onCloseMenu: (title: string) => void;
 }) => {
-  const anchorEl = useRef(null);
+  const theme = useTheme();
+  const anchorEl = useRef<HTMLAnchorElement | null>(null);
 
   const handleToggleMenu = () => {
     isOpenMenu ? handleCloseMenu() : handleOpenMenu();
@@ -28,6 +49,28 @@ export const DesktopMenuItem = ({
   const handleCloseMenu = () => {
     onCloseMenu(menu.title);
   };
+
+  const onClickLinkMenu = (path: string) => {
+    router.push(path);
+  };
+
+  if (
+    !menu.children &&
+    menu.title !== "Đăng nhập" &&
+    menu.title !== "Mở tài khoản mới"
+  ) {
+    return (
+      <CustomLink
+        onClick={() => {
+          menu.title === "Thị trường" && logEventMenu("web_view_market_site");
+          onClickLinkMenu(menu.path);
+        }}
+        sx={{ fontSize: 14 }}
+      >
+        {menu.title}
+      </CustomLink>
+    );
+  }
 
   return (
     <>
@@ -83,9 +126,7 @@ export const DesktopMenuItem = ({
               key={item.title}
               onClick={() => onClickLinkMenu(item.path)}
             >
-              <ListItem sx={{ py: 0, fontSize: "14px" }}>
-                {item.title}
-              </ListItem>
+              <ListItem sx={{ py: 0, fontSize: "14px" }}>{item.title}</ListItem>
             </CustomLink>
           ))}
         </List>

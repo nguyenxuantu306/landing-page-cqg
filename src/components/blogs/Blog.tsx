@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, styled } from "@mui/material";
+import { Box, Container, styled, Grid } from "@mui/material";
 
 import DownloadCqg from "./content/download-cqg";
 import CqgDesktop from "./content/cqg-desktop";
@@ -10,11 +10,17 @@ export default function Blog() {
       sx={{
         position: "relative",
         width: "100%",
-        backgroundColor: "rgb(249 250 251)",
+        
       }}
     >
       <Container>
+        <Grid 
+        position="absolute"
+
+        sx={{ left: '100%', backgroundColor: "red", display: "block"}}
+        ></Grid>
         <DownloadCqg />
+        <Grid />
         <CqgDesktop />
       </Container>
     </Box>
